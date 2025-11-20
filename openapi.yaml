@@ -24,7 +24,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KundbehovsflodeResponse'
+                $ref: '#/components/schemas/GetKundbehovsflodeResponse'
         '400':
           description: Bad request (t.ex. felaktigt kundbehovsflode_id)
     post:
@@ -45,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KundbehovsflodeResponse'
+                $ref: '#/components/schemas/PostKundbehovsflodeResponse'
         '400':
           description: Bad request (t.ex. felaktigt kundbehovsflode_id)
   /kundbehovsflode:
@@ -116,7 +116,7 @@ components:
           description: Beskrivning av kundbehovsflödespecifikationen
         uppgiftspecifikation:
           type: array
-          descriptoin: En eller flera uppgiftsspecifikationer som ingår i kundbehovsflödespecifikationen
+          description: En eller flera uppgiftsspecifikationer som ingår i kundbehovsflödespecifikationen
           items:
             $ref: '#/components/schemas/Uppgiftspecifikation'
       required:
@@ -158,7 +158,7 @@ components:
             $ref: '#/components/schemas/Regel'
         uppgiftsGui:
           type: string
-          descrption: GUI komponent för uppgiften
+          description: GUI komponent för uppgiften
       required:
         - id
 
@@ -234,3 +234,32 @@ components:
           description: Avser vilken punkt i stycket Lagrummet är av
       required:
         - id
+
+    GetKundbehovsflodeResponse:
+      type: object
+      description: Svar vid hämtning av kundbehovsflöde
+      properties:
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+      required:
+        - kundbehovsflode
+
+    PostKundbehovsflodeResponse:
+      type: object
+      description: Svar vid uppdatering av kundbehovsflöde
+      properties:
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+      required:
+        - kundbehovsflode
+
+    PostKundbehovResponse:
+      type: object
+      description: Svar vid skapande av nytt kundbehov
+      properties:
+        kundbehovsflode_id:
+          type: string
+          description: Det nyss skapade kundbehovsflödets unika ID
+          format: uuid
+      required:
+        - kundbehovsflode_id
