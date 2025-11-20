@@ -1,1 +1,1 @@
-include "rimfrost-operativt-uppgiftslager-api-jaxrs-spec", "rimfrost-operativt-uppgiftslager-api-spec"
+include "rimfrost-service-kundbehovsflode-openapi-jaxrs-spec", "rimfrost-service-kundbehovsflode-openapi-spec"
