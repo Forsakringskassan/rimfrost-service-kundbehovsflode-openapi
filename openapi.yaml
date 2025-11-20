@@ -87,7 +87,6 @@ components:
           type: string
           description: DateTime när kundbehovsflödet avslutades, enligt ISO 8601
           format: date-time
-          nullable: true
         kundbehovsspecifikation:
           $ref: '#/components/schemas/Kundbehovsflodespecifikation'
       required:
@@ -216,7 +215,6 @@ components:
           type: string
           description: DateTime för sluttiden av giltighet, enligt ISO 8601
           format: date-time
-          nullable: true
         forfattning:
           type: string
           description: Avser vilken författning Lagrummet är av
