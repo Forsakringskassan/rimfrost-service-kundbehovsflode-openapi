@@ -1,0 +1,236 @@
+openapi: 3.0.3
+info:
+  title: Kundbehovsflöde API
+  version: 1.0.0
+  description: API för att hämta och lagra kundbehovsflödesinfo, samt för att kicka igång nya kundbehov.
+
+paths:
+  /kundbehovsflode/{kundbehovsflode_id}:
+    get:
+      tags: [KundbehovsflodeController]
+      operationId: getKundbehovsflode
+      summary: Hämta kundbehovsflöde
+      description: Hämta kundbehovsflödet knytt till kundbehovsflode_id
+      parameters:
+        - name: kundbehovsflode_id
+          in: path
+          required: true
+          description: Kundbehovsflödets id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Kundbehovsflöde hämtat OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KundbehovsflodeResponse'
+        '400':
+          description: Bad request (t.ex. felaktigt kundbehovsflode_id)
+    post:
+      tags: [KundbehovsflodeController]
+      operationId: postKundbehovsflode
+      summary: Uppdatera kundbehovsflöde
+      description: Uppdatera kundbehovsflödet för kundbehovsflode_id
+      parameters:
+        - name: kundbehovsflode_id
+          in: path
+          required: true
+          description: Kundbehovsflödets id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Kundbehovsflöde skapat OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KundbehovsflodeResponse'
+        '400':
+          description: Bad request (t.ex. felaktigt kundbehovsflode_id)
+  /kundbehovsflode:
+    post:
+      tags: [KundbehovsflodeController]
+      operationId: postKundbehov
+      summary: Skapar ett nytt kundbehov
+      description: Skapar ett nytt kundbehov som i sin tur skapar ett kundbehovsflöde
+      responses:
+        '200':
+          description: Skapat kundbehov OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostKundbehovResponse'
+
+components:
+  schemas:
+    Kundbehovsflode:
+      type: object
+      description: Kundbehovsflöde, ärendeinstans
+      properties:
+        id:
+          type: string
+          description: Kundbehovsflödets unika ID
+          format: uuid
+        version:
+          type: string
+          description: Kundbehovsflödets version
+        processinstansId:
+          type: string
+          description: BPMN processinstansens unika ID
+          format: uuid
+        skapadTS:
+          type: string
+          description: DateTime när kundbehovsflödet skapades, enligt ISO 8601
+          format: date-time
+        avslutadTS:
+          type: string
+          description: DateTime när kundbehovsflödet avslutades, enligt ISO 8601
+          format: date-time
+          nullable: true
+        kundbehovsspecifikation:
+          $ref: '#/components/schemas/Kundbehovsflodespecifikation'
+      required:
+        - id
+        - processinstansId
+
+    Kundbehovsflodespecifikation:
+      type: object
+      description: Kundbehovsflödespecifikation, ärendeslag
+      properties:
+        id:
+          type: string
+          description: Kundbehovsflödespecifikationens unika ID
+          format: uuid
+        version:
+          type: string
+          description: Kundbehovsflödespecifikationens version
+        bpmn:
+          type: string
+          description: BPMN processbeskrivning
+        namn:
+          type: string
+          description: Namnet på kundbehovsflödespecifikationen
+        beskrivning:
+          type: string
+          description: Beskrivning av kundbehovsflödespecifikationen
+        uppgiftspecifikation:
+          type: array
+          descriptoin: En eller flera uppgiftsspecifikationer som ingår i kundbehovsflödespecifikationen
+          items:
+            $ref: '#/components/schemas/Uppgiftspecifikation'
+      required:
+        - id
+
+    Uppgiftspecifikation:
+      type: object
+      description: Uppgiftsspecifikation
+      properties:
+        id:
+          type: string
+          description: Uppgiftsspecifikationens unika ID
+          format: uuid
+        version:
+          type: string
+          description: Uppgiftsspecifikationens version
+        namn:
+          type: string
+          description: Namnet på uppgiftsspecifikationen
+        uppgiftbeskrivning:
+          type: string
+          description: Beskrivning av uppgiften i mer detalj
+        verksamhetslogik:
+          description: Beteckning för verksamhetslogiken i uppgiften
+          $ref: '#/components/schemas/Verksamhetslogik'
+        roll:
+          description: Behörighetsroll för uppgiften
+          $ref: '#/components/schemas/Roll'
+        applikationsId:
+          description: ID för applikation som hanterar uppgiften
+          type: string
+        applikationsVersion:
+          description: Version för applikation som hanterar uppgiften
+          type: string
+        regel:
+          type: array
+          description: En eller flera regler som styr uppgiften
+          items:
+            $ref: '#/components/schemas/Regel'
+        uppgiftsGui:
+          type: string
+          descrption: GUI komponent för uppgiften
+      required:
+        - id
+
+    Verksamhetslogik:
+      type: string
+      description: Verksamhetslogik
+      enum:
+        - A
+        - B
+        - C
+
+    Roll:
+      type: string
+      description: Enum se.fk.github.Kundbehov.Roll
+      enum:
+        - AGARE
+        - DJUR
+        - ANSVARIG_HANDLAGGARE
+
+    Regel:
+      type: object
+      description: Regel enligt POJO se.fk.github.Regel.Regel
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Regelns unika ID
+        version:
+          type: string
+          description: Version av regeln
+        lagrum:
+          type: array
+          description: Ett eller flera Lagrum som Regeln hänvisar till
+          items:
+            $ref: '#/components/schemas/Lagrum'
+      required:
+        - id
+
+    Lagrum:
+      type: object
+      description: Lagrum
+      properties:
+        id:
+          type: string
+          description: Lagrummets unika ID
+          format: uuid
+        version:
+          type: string
+          description: Lagrummets version
+        giltigFrom:
+          type: string
+          description: DateTime för starttiden av giltighet, enligt ISO 8601
+          format: date-time
+        giltigTom:
+          type: string
+          description: DateTime för sluttiden av giltighet, enligt ISO 8601
+          format: date-time
+          nullable: true
+        forfattning:
+          type: string
+          description: Avser vilken författning Lagrummet är av
+        kapitel:
+          type: string
+          description: Avser vilket kapitel av författningen Lagrummet är av
+        paragraf:
+          type: string
+          description: Avser vilket paragraf i kapitlet Lagrummet är av
+        stycke:
+          type: string
+          description: Avser vilket stycke i paragrafen Lagrummet är av
+        punkt:
+          type: string
+          description: Avser vilken punkt i stycket Lagrummet är av
+      required:
+        - id
