@@ -151,7 +151,7 @@ components:
           description: Slutdatum/tid för perioden, enligt ISO 8601
       required:
         - start
-        - end
+        - slut
 
     Avsikt:
       type: string
