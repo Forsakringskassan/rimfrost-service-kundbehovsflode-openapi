@@ -1,3 +1,16 @@
+## 1.0.0 (2025-11-24)
+
+### Breaking changes
+
+-  extend api with more data ([6a51f](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/6a51fd7134c3d9e) David Söderberg)  
+
+### Bug Fixes
+
+-  update openapi.yaml variable ([8eefc](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/8eefcef43742401) davidsoderberg-ductus)  
+
+### Other changes
+
+
 # rimfrost-service-kundbehovsflode-openapi changelog
 
 Changelog of rimfrost-service-kundbehovsflode-openapi.
