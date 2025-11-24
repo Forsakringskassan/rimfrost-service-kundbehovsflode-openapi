@@ -72,6 +72,8 @@ components:
           type: string
           description: Kundbehovsflödets unika ID
           format: uuid
+        kundbehov:
+          $ref: '#/components/schemas/Kundbehov'
         version:
           type: string
           description: Kundbehovsflödets version
@@ -92,6 +94,113 @@ components:
       required:
         - id
         - processinstansId
+        - kundbehov
+    Kundbehov:
+      type: object
+      description: Kundbehov
+      properties:
+        id:
+          type: string
+          description: Kundbehovets unika ID
+          format: uuid
+        version:
+          type: string
+          description: Kundbehovets version
+        kundbehovsdatum:
+          type: string
+          description: Datetime när kundbehovet uppstod, enligt ISO 8601
+          format: date-time
+        kundbehovsstatus:
+          $ref: '#/components/schemas/Kundbehovsstatus'
+        period:
+          $ref: '#/components/schemas/Period'
+        avsikt:
+          $ref: '#/components/schemas/Avsikt'
+        andringsorsak:
+          type: string
+          description: Orsak till ändring av kundbehovet
+        kundbehovsroll:
+          type: array
+          description: Rollerna i kundbehovet
+          items:
+            $ref: '#/components/schemas/Kundbehovsroll'
+      required:
+        - id
+
+    Kundbehovsstatus:
+      type: string
+      description: Kundbehovsstatus
+      enum:
+        - PLANERAT
+        - YRKAT
+        - UNDER_UTREDNING
+        - FASTSTALLT_UNDER_UTREDNING
+        - FASTSTALLT
+
+    Period:
+      type: object
+      description: En tidsperiod med start och slut
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Startdatum/tid för perioden, enligt ISO 8601
+        slut:
+          type: string
+          format: date-time
+          description: Slutdatum/tid för perioden, enligt ISO 8601
+      required:
+        - start
+        - slut
+
+    Avsikt:
+      type: string
+      description: Avsikt
+      enum:
+        - NY
+        - ANDRING
+        - BORTTAG
+        - ATERTAGEN
+
+    Kundbehovsroll:
+      type: object
+      description: Roll i kundbehovet
+      properties:
+        id:
+          type: string
+          description:  unika ID
+          format: uuid
+        individ:
+          $ref: '#/components/schemas/Individ'
+        roll:
+          $ref: '#/components/schemas/Roll'
+        yrkande:
+          type: boolean
+          description: Yrkande
+      required:
+        - id
+        - individ
+        - roll
+        - yrkande
+
+    Individ:
+      type: object
+      description: Individ
+      properties:
+        id:
+          type: string
+          description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
+          pattern: '^\d{8}-\d{4}$'
+        fornamn:
+          type: string
+          description: Förnamn
+        efternamn:
+          type: string
+          description: Efternamn
+      required:
+        - id
+        - fornamn
+        - efternamn
 
     Kundbehovsflodespecifikation:
       type: object
@@ -171,7 +280,7 @@ components:
 
     Roll:
       type: string
-      description: Enum se.fk.github.Kundbehov.Roll
+      description: Roll i kundbehovet
       enum:
         - AGARE
         - DJUR
@@ -179,7 +288,7 @@ components:
 
     Regel:
       type: object
-      description: Regel enligt POJO se.fk.github.Regel.Regel
+      description: Regel
       properties:
         id:
           type: string
