@@ -1,3 +1,14 @@
+## 1.0.1 (2025-11-25)
+
+### Bug Fixes
+
+-  swap status code 200 to 201 ([eda16](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/eda16e964a641e9) David Söderberg)  
+-  change path for creating a new kundbehov ([7a5ec](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/7a5ec4524fc0448) David Söderberg)  
+-  add requestbody for /kundbehovsflode post ([c618e](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/c618e2b2dca2a1b) David Söderberg)  
+
+### Other changes
+
+
 ## 1.0.0 (2025-11-24)
 
 ### Breaking changes
