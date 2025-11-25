@@ -50,9 +50,9 @@ paths:
                 $ref: '#/components/schemas/PostKundbehovsflodeResponse'
         '400':
           description: Bad request (t.ex. felaktigt kundbehovsflode_id)
-  /kundbehovsflode:
+  /kundbehov:
     post:
-      tags: [KundbehovsflodeController]
+      tags: [KundbehovsController]
       operationId: postKundbehov
       summary: Skapar ett nytt kundbehov
       description: Skapar ett nytt kundbehov som i sin tur skapar ett kundbehovsflöde
