@@ -18,6 +18,7 @@ paths:
           description: Kundbehovsflödets id
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Kundbehovsflöde hämtat OK
@@ -39,6 +40,7 @@ paths:
           description: Kundbehovsflödets id
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: Kundbehovsflöde skapat OK
@@ -54,6 +56,18 @@ paths:
       operationId: postKundbehov
       summary: Skapar ett nytt kundbehov
       description: Skapar ett nytt kundbehov som i sin tur skapar ett kundbehovsflöde
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostKundbehovRequest'
+            example:
+              persnr: "19900101-1234"
+              formanstyp: "VAH"
+              period:
+                start: "2025-01-01T00:00:00Z"
+                end: "2025-12-31T23:59:59Z"
       responses:
         '200':
           description: Skapat kundbehov OK
@@ -103,6 +117,9 @@ components:
           type: string
           description: Kundbehovets unika ID
           format: uuid
+        formanstyp:
+          type: string
+          description: Typ av förmån
         version:
           type: string
           description: Kundbehovets version
@@ -359,6 +376,23 @@ components:
           $ref: '#/components/schemas/Kundbehovsflode'
       required:
         - kundbehovsflode
+
+    PostKundbehovRequest:
+      type: object
+      description: Data som krävs för att skapa ett nytt kundbehov
+      properties:
+        persnr:
+          type: string
+          description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
+        formanstyp:
+          type: string
+          description: Typ av förmån
+        period:
+          $ref: '#/components/schemas/Period'
+      required:
+        - persnr
+        - formanstyp
+        - period
 
     PostKundbehovResponse:
       type: object
