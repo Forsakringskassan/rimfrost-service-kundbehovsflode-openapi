@@ -5,14 +5,42 @@ info:
   description: API för att hämta och lagra kundbehovsflödesinfo, samt för att kicka igång nya kundbehov.
 
 paths:
-  /kundbehovsflode/{kundbehovsflode_id}:
+  /kundbehovsflode:
+    post:
+      tags: [KundbehovsflodeController]
+      operationId: postKundbehovsflode
+      summary: Skapa ett nytt kundbehovsflöde
+      description: Skapa ett nytt kundbehovsflöde för ett speficikt kundbehov
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kundbehovId:
+                  type: string
+                  format: uuid
+                  description: Kundbehovets id
+              required:
+                - kundbehovId
+      responses:
+        '200':
+          description: Kundbehovsflöde skapat OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostKundbehovsflodeResponse'
+        '400':
+          description: Bad request (t.ex. felaktigt kundbehovId)
+  /kundbehovsflode/{kundbehovsflodeId}:
     get:
       tags: [KundbehovsflodeController]
       operationId: getKundbehovsflode
       summary: Hämta kundbehovsflöde
-      description: Hämta kundbehovsflödet knytt till kundbehovsflode_id
+      description: Hämta kundbehovsflödet knytt till kundbehovsflodeId
       parameters:
-        - name: kundbehovsflode_id
+        - name: kundbehovsflodeId
           in: path
           required: true
           description: Kundbehovsflödets id
@@ -27,35 +55,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetKundbehovsflodeResponse'
         '400':
-          description: Bad request (t.ex. felaktigt kundbehovsflode_id)
-    post:
+          description: Bad request (t.ex. felaktigt kundbehovsflodeId)
+    put:
       tags: [KundbehovsflodeController]
-      operationId: postKundbehovsflode
+      operationId: putKundbehovsflode
       summary: Uppdatera kundbehovsflöde
-      description: Uppdatera kundbehovsflödet för kundbehovsflode_id
+      description: Uppdatera kundbehovsflödet för kundbehovsflodeId
       parameters:
-        - name: kundbehovsflode_id
+        - name: kundbehovsflodeId
           in: path
           required: true
           description: Kundbehovsflödets id
           schema:
             type: string
             format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutKundbehovsflodeRequest'
       responses:
         '200':
-          description: Kundbehovsflöde skapat OK
+          description: Kundbehovsflöde uppdaterat OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostKundbehovsflodeResponse'
+                $ref: '#/components/schemas/PutKundbehovsflodeResponse'
         '400':
-          description: Bad request (t.ex. felaktigt kundbehovsflode_id)
+          description: Bad request (t.ex. felaktigt kundbehovsflodeId)
   /kundbehov:
     post:
-      tags: [KundbehovsController]
+      tags: [KundbehovController]
       operationId: postKundbehov
       summary: Skapar ett nytt kundbehov
-      description: Skapar ett nytt kundbehov som i sin tur skapar ett kundbehovsflöde
+      description: Skapar ett nytt kundbehov
       requestBody:
         required: true
         content:
@@ -368,9 +402,27 @@ components:
       required:
         - kundbehovsflode
 
-    PostKundbehovsflodeResponse:
+    PutKundbehovsflodeRequest:
+      type: object
+      description: Data som krävs för att uppdatera ett kundbehovsflöde
+      properties:
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+      required:
+        - kundbehovsflode
+
+    PutKundbehovsflodeResponse:
       type: object
       description: Svar vid uppdatering av kundbehovsflöde
+      properties:
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+      required:
+        - kundbehovsflode
+
+    PostKundbehovsflodeResponse:
+      type: object
+      description: Svar vid skapande av ett nytt kundbehovsflöde
       properties:
         kundbehovsflode:
           $ref: '#/components/schemas/Kundbehovsflode'
@@ -396,11 +448,9 @@ components:
 
     PostKundbehovResponse:
       type: object
-      description: Svar vid skapande av nytt kundbehov
+      description: Svar vid skapande av ett nytt kundbehov
       properties:
-        kundbehovsflode_id:
-          type: string
-          description: Det nyss skapade kundbehovsflödets unika ID
-          format: uuid
+        kundbehov:
+          $ref: '#/components/schemas/Kundbehov'
       required:
-        - kundbehovsflode_id
+        - kundbehov
