@@ -175,6 +175,11 @@ components:
           description: Rollerna i kundbehovet
           items:
             $ref: '#/components/schemas/Kundbehovsroll'
+        ersattning:
+          type: array
+          description: En eller flera ersättningar kopplade till kundbehovet
+          items:
+            $ref: '#/components/schemas/Ersattning'
       required:
         - id
 
@@ -392,6 +397,102 @@ components:
           description: Avser vilken punkt i stycket Lagrummet är av
       required:
         - id
+
+    Ersattning:
+      type: object
+      description: Ersättning kopplad till ett kundbehov
+      properties:
+        belopp:
+          type: integer
+          description: Ersättningsbelopp
+        berakningsgrund:
+          $ref: '#/components/schemas/Berakningsgrund'
+        beloppstyp:
+          $ref: '#/components/schemas/Beloppstyp'
+        ersattningstyp:
+          $ref: '#/components/schemas/Ersattningstyp'
+        periodisering:
+          $ref: '#/components/schemas/Periodisering'
+        omfattning:
+          type: integer
+          description: Omfattning för ersättningen (i procent, 50 = 50%)
+        beslutsutfall:
+          type: string
+          description: Beslutsutfall för ersättningen
+          enum:
+            - JA
+            - NEJ
+            - FU
+        avslagsanledning:
+          type: string
+          description: Anledning till avslag
+        produceratResultat:
+          type: array
+          description: En eller flera producerade resultat kopplade till ersättningen
+          items:
+            $ref: '#/components/schemas/ProduceratResultat'
+
+    Berakningsgrund:
+      type: string
+      description: Grunden för beräkning
+      enum:
+        - LON
+        - FASTBELOPP
+
+    Beloppstyp:
+      type: string
+      description: Typ av belopp
+      enum:
+        - INKOMSTBASERAD
+        - GRUNDBELOPP
+
+    Ersattningstyp:
+      type: string
+      description: Ersättningstyp enligt lagrum
+      enum:
+        - TILLFALLIG_VARD_AV_HUND
+        - HUNDBIDRAG
+
+    periodisering:
+      type: string
+      description: Periodisering av ersättning
+      enum:
+        - MANAD
+        - VECKA
+        - DAG
+        - ENGANGS
+
+    ProduceratResultat:
+      type: object
+      description: Producerat resultat kopplat till en ersättning
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Producerat resultatets unika ID
+        version:
+          type: string
+          description: Version av producerat resultat
+        from:
+          type: string
+          format: date-time
+          description: Startdatum/tid då resultatet gäller från, enligt ISO 8601
+        tom:
+          type: string
+          format: date-time
+          description: Slutdatum/tid då resultatet gäller till, enligt ISO 8601
+        status:
+          $ref: '#/components/schemas/Ersattningsstatus'
+
+    Ersattningsstatus:
+      type: string
+      description: Ersättningsstatus
+      enum:
+        - PLANERAT
+        - YRKAT
+        - UNDER_UTREDNING
+        - FASTSTALLT_UNDER_UTREDNING
+        - FASTSTALLT
 
     GetKundbehovsflodeResponse:
       type: object
