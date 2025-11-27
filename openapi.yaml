@@ -453,7 +453,7 @@ components:
         - TILLFALLIG_VARD_AV_HUND
         - HUNDBIDRAG
 
-    periodisering:
+    Periodisering:
       type: string
       description: Periodisering av ersättning
       enum:
