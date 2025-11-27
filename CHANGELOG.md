@@ -1,3 +1,13 @@
+## 1.1.0 (2025-11-27)
+
+### Features
+
+-  add new object 'Ersattning' to 'Kundbehov' ([f3c0f](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/f3c0fa7f7bf789a) David Söderberg)  
+
+### Bug Fixes
+
+-  change 'periodisering' to 'Periodisering' ([ff9d0](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/ff9d0598d52bb5c) David Söderberg)  
+
 ## 1.0.1 (2025-11-25)
 
 ### Bug Fixes
