@@ -402,6 +402,10 @@ components:
       type: object
       description: Ersättning kopplad till ett kundbehov
       properties:
+        id:
+          type: string
+          description: Ersättningens unika ID
+          format: uuid
         belopp:
           type: integer
           description: Ersättningsbelopp
