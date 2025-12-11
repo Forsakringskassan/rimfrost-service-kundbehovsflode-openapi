@@ -589,7 +589,7 @@ components:
       type: object
       description: Svar vid uppdatering av kundbehovsflöde
       properties:
-        kundbehovsflode:
+        uppgift:
           $ref: '#/components/schemas/Uppgift'
       required:
         - kundbehovsflode
