@@ -1,3 +1,9 @@
+## 1.3.1 (2025-12-11)
+
+### Bug Fixes
+
+-  fix variable name to uppgift for uppgift ([23614](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/236147f9915bf8f) Nils Elveros)  
+
 ## 1.3.0 (2025-12-11)
 
 ### Features
