@@ -580,7 +580,7 @@ components:
       type: object
       description: Data som krävs för att uppdatera ett kundbehovsflöde
       properties:
-        kundbehovsflode:
+        uppgift:
           $ref: '#/components/schemas/Uppgift'
       required:
         - kundbehovsflode
