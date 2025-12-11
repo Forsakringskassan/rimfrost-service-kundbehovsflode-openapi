@@ -1,3 +1,13 @@
+## 1.3.0 (2025-12-11)
+
+### Features
+
+-  add uppgift and underlag and update the PutRequest/Response ([0e21e](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/0e21edc9192a60d) Nils Elveros)  
+
+### Bug Fixes
+
+-  add dependency to support nullable ([90f53](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/90f53691985dbe4) Nils Elveros)  
+
 ## 1.2.0 (2025-11-27)
 
 ## 1.1.0 (2025-11-27)
