@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Kundbehovsflöde API
-  version: 1.0.0
+  version: 1.0.1
   description: API för att hämta och lagra kundbehovsflödesinfo, samt för att kicka igång nya kundbehov.
 
 paths:
@@ -193,6 +193,14 @@ components:
         - FASTSTALLT_UNDER_UTREDNING
         - FASTSTALLT
 
+    UppgiftStatus:
+      type: string
+      description: Uppgiftens status
+      enum:
+        - PLANERAD
+        - TILLDELAD
+        - AVSLUTAD
+
     Period:
       type: object
       description: En tidsperiod med start och slut
@@ -286,6 +294,63 @@ components:
       required:
         - id
 
+    Uppgift:
+      type: object
+      description: Uppgift
+      properties:
+        id:
+          type: string
+          description: Uppgiftens ID
+          format: uuid
+        version:
+          type: string
+          description: Uppgiftens version
+        skapadTs:
+          type: string
+          format: date-time
+          description: Tidpunkt då uppgiften skapades, enligt ISO 8601
+        utfordTs:
+          type: string
+          format: date-time
+          description: Tidpunkt då uppgiften utfördes, enligt ISO 8601
+          nullable: true
+        planeradTs:
+          type: string
+          format: date-time
+          description: Tidpunkt då uppgiften är planerad att utföras, enligt ISO 8601
+          nullable: true
+        utforarId:
+          type: string
+          description: Utförarens ID
+          format: uuid
+          nullable: true
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+        uppgiftStatus:
+          $ref: '#/components/schemas/UppgiftStatus'
+        FSSAinformation:
+          $ref: '#/components/schemas/FSSAinformation'
+        uppgiftspecifikation:
+          $ref: '#/components/schemas/Uppgiftspecifikation'
+        underlag:
+          type: array
+          description: Ett eller flera underlag som uppgiften använder sig av
+          items:
+            $ref: '#/components/schemas/Underlag'
+
+    Underlag:
+      type: object
+      properties:
+        typ:
+          type: string
+          description: Specificerar vilken typ av underlag det är
+        version:
+          type: string
+          description: Specificerar vilken version av underlags typ det är
+        data:
+          type: string
+          description: All data i underlaget i formatet JSON
+
     Uppgiftspecifikation:
       type: object
       description: Uppgiftsspecifikation
@@ -333,6 +398,13 @@ components:
         - A
         - B
         - C
+
+    FSSAinformation:
+      type: string
+      enum:
+        - HANDLAGGNING_PAGAR
+        - VANTAR_PA_INFO_FRAN_ANNAN_PART
+        - VANTAR_PA_INFO_FRAN_KUND
 
     Roll:
       type: string
@@ -431,10 +503,7 @@ components:
           type: string
           description: Anledning till avslag
         produceratResultat:
-          type: array
-          description: En eller flera producerade resultat kopplade till ersättningen
-          items:
-            $ref: '#/components/schemas/ProduceratResultat'
+          $ref: '#/components/schemas/ProduceratResultat'
 
     Berakningsgrund:
       type: string
@@ -512,7 +581,7 @@ components:
       description: Data som krävs för att uppdatera ett kundbehovsflöde
       properties:
         kundbehovsflode:
-          $ref: '#/components/schemas/Kundbehovsflode'
+          $ref: '#/components/schemas/Uppgift'
       required:
         - kundbehovsflode
 
@@ -521,7 +590,7 @@ components:
       description: Svar vid uppdatering av kundbehovsflöde
       properties:
         kundbehovsflode:
-          $ref: '#/components/schemas/Kundbehovsflode'
+          $ref: '#/components/schemas/Uppgift'
       required:
         - kundbehovsflode
 
