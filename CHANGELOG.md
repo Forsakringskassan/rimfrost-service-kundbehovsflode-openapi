@@ -1,3 +1,9 @@
+## 1.3.2 (2025-12-11)
+
+### Bug Fixes
+
+-  Update property name ([a29d5](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/a29d5cf1bc72069) Nils Elveros)  
+
 ## 1.3.1 (2025-12-11)
 
 ### Bug Fixes
