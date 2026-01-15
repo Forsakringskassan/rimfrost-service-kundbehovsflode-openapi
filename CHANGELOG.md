@@ -1,3 +1,9 @@
+## 1.3.4 (2026-01-15)
+
+### Bug Fixes
+
+-  avslagsanledning as nullable ([9159e](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/9159efe81fcd26c) Nils Elveros)  
+
 ## 1.3.3 (2026-01-15)
 
 ### Bug Fixes
