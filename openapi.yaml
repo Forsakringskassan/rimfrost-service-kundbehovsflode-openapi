@@ -381,10 +381,8 @@ components:
           description: Version för applikation som hanterar uppgiften
           type: string
         regel:
-          type: array
-          description: En eller flera regler som styr uppgiften
-          items:
-            $ref: '#/components/schemas/Regel'
+          description: En regler som styr uppgiften
+          $ref: '#/components/schemas/Regel'
         uppgiftsGui:
           type: string
           description: GUI komponent för uppgiften
@@ -426,10 +424,8 @@ components:
           type: string
           description: Version av regeln
         lagrum:
-          type: array
-          description: Ett eller flera Lagrum som Regeln hänvisar till
-          items:
-            $ref: '#/components/schemas/Lagrum'
+          description: Ett Lagrum som Regeln hänvisar till
+          $ref: '#/components/schemas/Lagrum'
       required:
         - id
 
