@@ -1,3 +1,9 @@
+## 1.3.3 (2026-01-15)
+
+### Bug Fixes
+
+-  regel and lagrum as single obejct instead of array ([5d4f6](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/5d4f69b5aebec35) Nils Elveros)  
+
 ## 1.3.2 (2025-12-11)
 
 ### Bug Fixes
