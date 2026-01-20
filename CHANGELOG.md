@@ -1,3 +1,9 @@
+## 1.3.5 (2026-01-20)
+
+### Bug Fixes
+
+-  lagrum giltigTom nullable ([d87b3](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/d87b32b2a2daacb) Nils Elveros)  
+
 ## 1.3.4 (2026-01-15)
 
 ### Bug Fixes
