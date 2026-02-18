@@ -1,3 +1,9 @@
+## 1.3.7 (2026-02-18)
+
+### Bug Fixes
+
+-  add ersattningId to patch ([fa654](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/fa654206778428f) Nils Elveros)  
+
 ## 1.3.6 (2026-02-18)
 
 ### Bug Fixes
