@@ -665,6 +665,10 @@ components:
       type: object
       description: Uppdatering av beslutsutfall för en ersättning
       properties:
+        ersattningId:
+          type: string
+          format: uuid
+          description: Ersättningens unika ID
         beslutsutfall:
           $ref: '#/components/schemas/Beslutsutfall'
         avslagsanledning:
@@ -672,6 +676,7 @@ components:
           nullable: true
           description: Anledning till avslag
       required:
+        - ersattningId
         - beslutsutfall
 
     PatchKundbehovsflodeRequest:
