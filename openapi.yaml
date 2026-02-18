@@ -84,6 +84,7 @@ paths:
                 $ref: '#/components/schemas/PutKundbehovsflodeResponse'
         '400':
           description: Bad request (t.ex. felaktigt kundbehovsflodeId)
+  /kundbehovsflode/{kundbehovsflodeId}/ersattning:
     patch:
       tags: [KundbehovsflodeController]
       operationId: patchKundbehovsflode
