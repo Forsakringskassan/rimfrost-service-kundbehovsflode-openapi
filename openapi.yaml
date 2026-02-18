@@ -84,6 +84,34 @@ paths:
                 $ref: '#/components/schemas/PutKundbehovsflodeResponse'
         '400':
           description: Bad request (t.ex. felaktigt kundbehovsflodeId)
+    patch:
+      tags: [KundbehovsflodeController]
+      operationId: patchKundbehovsflode
+      summary: Uppdatera beslutsutfall för kundbehovsflöde
+      description: Uppdatera beslutsutfall och avslagsanledning för ersättningar i ett kundbehovsflöde
+      parameters:
+        - name: kundbehovsflodeId
+          in: path
+          required: true
+          description: Kundbehovsflödets id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchKundbehovsflodeRequest'
+      responses:
+        '200':
+          description: Kundbehovsflöde uppdaterat OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchKundbehovsflodeResponse'
+        '400':
+          description: Bad request (t.ex. felaktigt kundbehovsflodeId)
   /kundbehov:
     post:
       tags: [KundbehovController]
@@ -101,7 +129,7 @@ paths:
               formanstyp: "VAH"
               period:
                 start: "2025-01-01T00:00:00Z"
-                end: "2025-12-31T23:59:59Z"
+                slut: "2025-12-31T23:59:59Z"
       responses:
         '201':
           description: Skapat kundbehov OK
@@ -324,8 +352,10 @@ components:
           description: Utförarens ID
           format: uuid
           nullable: true
-        kundbehovsflode:
-          $ref: '#/components/schemas/Kundbehovsflode'
+        kundbehovsflodeId:
+          type: string
+          description: Kundbehovsflödets Id
+          format: uuid
         uppgiftStatus:
           $ref: '#/components/schemas/UppgiftStatus'
         FSSAinformation:
@@ -490,12 +520,7 @@ components:
           type: integer
           description: Omfattning för ersättningen (i procent, 50 = 50%)
         beslutsutfall:
-          type: string
-          description: Beslutsutfall för ersättningen
-          enum:
-            - JA
-            - NEJ
-            - FU
+          $ref: '#/components/schemas/Beslutsutfall'
         avslagsanledning:
           type: string
           nullable: true
@@ -581,7 +606,7 @@ components:
         uppgift:
           $ref: '#/components/schemas/Uppgift'
       required:
-        - kundbehovsflode
+        - uppgift
 
     PutKundbehovsflodeResponse:
       type: object
@@ -626,3 +651,39 @@ components:
           $ref: '#/components/schemas/Kundbehov'
       required:
         - kundbehov
+
+    Beslutsutfall:
+      type: string
+      description: Beslutsutfall för ersättning
+      enum:
+        - JA
+        - NEJ
+        - FU
+
+    UpdateErsattning:
+      type: object
+      description: Uppdatering av beslutsutfall för en ersättning
+      properties:
+        beslutsutfall:
+          $ref: '#/components/schemas/Beslutsutfall'
+        avslagsanledning:
+          type: string
+          nullable: true
+          description: Anledning till avslag
+      required:
+        - beslutsutfall
+
+    PatchKundbehovsflodeRequest:
+      type: array
+      description: Lista med ersättningar att uppdatera beslutsutfall för
+      items:
+        $ref: '#/components/schemas/UpdateErsattning'
+
+    PatchKundbehovsflodeResponse:
+      type: object
+      description: Svar vid uppdatering av beslutsutfall i kundbehovsflöde
+      properties:
+        kundbehovsflode:
+          $ref: '#/components/schemas/Kundbehovsflode'
+      required:
+        - kundbehovsflode
