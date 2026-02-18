@@ -1,3 +1,11 @@
+## 1.3.6 (2026-02-18)
+
+### Bug Fixes
+
+-  removing NPM_TOKEN ([ba624](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/ba6249c09ef0362) Tomas Bjerre)  
+-  updated path ([37e29](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/37e29f5b74156f8) Nils Elveros)  
+-  refactor to update ersattning in a new patch operation instead of put operation ([6f169](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/6f1695546792538) Nils Elveros)  
+
 ## 1.3.5 (2026-01-20)
 
 ### Bug Fixes
