@@ -616,7 +616,7 @@ components:
         uppgift:
           $ref: '#/components/schemas/Uppgift'
       required:
-        - kundbehovsflode
+        - uppgift
 
     PostKundbehovsflodeResponse:
       type: object
