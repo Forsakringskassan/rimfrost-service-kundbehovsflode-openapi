@@ -1,3 +1,9 @@
+## 1.3.8 (2026-02-24)
+
+### Bug Fixes
+
+-  update required field ([aefb6](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/aefb66132fa8e33) Nils Elveros)  
+
 ## 1.3.7 (2026-02-18)
 
 ### Bug Fixes
