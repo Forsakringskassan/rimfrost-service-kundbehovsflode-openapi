@@ -1,3 +1,10 @@
+## 1.3.9 (2026-02-27)
+
+### Bug Fixes
+
+-  use already existing ersattningssattus ([281ec](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/281ec7c3bd2c8ee) Nils Elveros)  
+-  add ersattningsstatus ([df8f9](https://github.com/Forsakringskassan/rimfrost-service-kundbehovsflode-openapi/commit/df8f926fe780b35) Nils Elveros)  
+
 ## 1.3.8 (2026-02-24)
 
 ### Bug Fixes
