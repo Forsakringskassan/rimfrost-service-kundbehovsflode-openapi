@@ -661,14 +661,6 @@ components:
         - NEJ
         - FU
 
-    ErsattningsStatus:
-      type: string
-      description: Status för ersättning
-      enum:
-        - YRKAT
-        - UTREDNING
-        - FASTSTALLT
-
     UpdateErsattning:
       type: object
       description: Uppdatering av beslutsutfall för en ersättning
@@ -685,7 +677,7 @@ components:
           nullable: true
           description: Anledning till avslag
         ErsattningsStatus:
-          $ref: '#/components/schemas/ErsattningsStatus'
+          $ref: '#/components/schemas/Ersattningsstatus'
           nullable: true
       required:
         - ersattningId
