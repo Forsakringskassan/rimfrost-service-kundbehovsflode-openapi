@@ -671,13 +671,16 @@ components:
           description: Ersättningens unika ID
         beslutsutfall:
           $ref: '#/components/schemas/Beslutsutfall'
+          nullable: true
         avslagsanledning:
           type: string
           nullable: true
           description: Anledning till avslag
+        ErsattningsStatus:
+          $ref: '#/components/schemas/Ersattningsstatus'
+          nullable: true
       required:
         - ersattningId
-        - beslutsutfall
 
     PatchKundbehovsflodeRequest:
       type: array
