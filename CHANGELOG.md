@@ -1,3 +1,9 @@
+## 1.3.11 (2026-03-06)
+
+### Bug Fixes
+
+-  Add role and compensation to yrkande request ([f86ec](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/f86ecb8f6f5bcf4) Lars Persson)  
+
 ## 1.3.10 (2026-03-03)
 
 ### Bug Fixes
