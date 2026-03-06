@@ -436,12 +436,19 @@ components:
         - VANTAR_PA_INFO_FRAN_KUND
 
     Roll:
-      type: string
+      type: object
       description: Roll i yrkandet
-      enum:
-        - AGARE
-        - DJUR
-        - ANSVARIG_HANDLAGGARE
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Id för roll
+        namn:
+          type: string
+          description: Namn på roll
+      example:
+        id: "58435904-c2b6-4b1f-a0ab-62f1839d8ff2"
+        namn: "Ägare"
 
     Regel:
       type: object
@@ -544,11 +551,19 @@ components:
         - GRUNDBELOPP
 
     Ersattningstyp:
-      type: string
+      type: object
       description: Ersättningstyp enligt lagrum
-      enum:
-        - TILLFALLIG_VARD_AV_HUND
-        - HUNDBIDRAG
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Id för ersättningstyp
+        namn:
+          type: string
+          description: Namn på ersättningstyp
+      example: 
+        id: "314454e9-ca6d-4fa9-9ec5-e724fc58112f"
+        description: "Hundbidrag"
 
     Periodisering:
       type: string
@@ -631,18 +646,45 @@ components:
       type: object
       description: Data som krävs för att skapa ett nytt yrkande
       properties:
-        persnr:
-          type: string
-          description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
+        person:
+          type: array
+          description: Personer involverade i yrkandet
+          items:
+            type: object
+            properties:
+              persnr:
+                type: string
+                description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
+              roll:
+                type: string
+                format: uuid
+                description: Id för roll i yrkandet
+              yrkande:
+                type: boolean
+                description: Anger om personen är den som utför själva yrkandet
         formanstyp:
           type: string
-          description: Typ av förmån
+          format: uuid
+          description: Id för typ av förmån
         period:
           $ref: '#/components/schemas/Period'
+        ersattning:
+          type: array
+          description: Begärda ersättningar
+          items:
+            type: object
+            description: Begärd ersättning
+            properties:
+              ersattningstyp:
+                $ref: '#/components/schemas/Ersattningstyp'
+              omfattning:
+                type: integer
+                description: Omfattning för ersättningen (i procent, 50 = 50%)
       required:
-        - persnr
+        - person
         - formanstyp
         - period
+        - ersattning
 
     PostYrkandeResponse:
       type: object
