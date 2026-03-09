@@ -1,3 +1,9 @@
+## 1.3.12 (2026-03-09)
+
+### Bug Fixes
+
+-  Add period and periodicity fields to ersattning objects in PostYrkandeRequest ([b2ce2](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/b2ce2666c33828f) Lars Persson)  
+
 ## 1.3.11 (2026-03-06)
 
 ### Bug Fixes
