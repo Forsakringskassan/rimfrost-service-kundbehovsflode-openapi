@@ -1,3 +1,9 @@
+## 1.3.13 (2026-03-10)
+
+### Bug Fixes
+
+-  uppdaterar yrkanderoll ([df46f](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/df46f9b14a6b367) Ulf Slunga)  
+
 ## 1.3.12 (2026-03-09)
 
 ### Bug Fixes
