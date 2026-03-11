@@ -668,8 +668,7 @@ components:
                 description: Anger om personen är den som utför själva yrkandet
         formanstyp:
           type: string
-          format: uuid
-          description: Id för typ av förmån
+          description: Typ av förmån
         period:
           $ref: '#/components/schemas/Period'
         ersattning:
