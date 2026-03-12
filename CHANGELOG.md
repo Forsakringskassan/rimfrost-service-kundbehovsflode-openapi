@@ -1,3 +1,9 @@
+## 1.3.15 (2026-03-12)
+
+### Bug Fixes
+
+-  trying to fix release ([42111](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/421110e576a3dad) Tomas Bjerre)  
+
 ## 1.3.14 (2026-03-11)
 
 ### Bug Fixes
