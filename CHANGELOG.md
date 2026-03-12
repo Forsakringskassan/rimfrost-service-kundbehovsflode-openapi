@@ -4,6 +4,12 @@
 
 -  Revert unplanned change of formanstyp in PostYrkandeRequest ([49688](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/49688a3194cf938) Lars Persson)  
 
+## 1.3.14 (2026-03-11)
+
+### Bug Fixes
+
+-  Revert unplanned change of formanstyp in PostYrkandeRequest ([49688](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/49688a3194cf938) Lars Persson)  
+
 ## 1.3.13 (2026-03-10)
 
 ### Bug Fixes
