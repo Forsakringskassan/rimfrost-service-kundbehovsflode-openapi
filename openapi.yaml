@@ -119,8 +119,9 @@ components:
           $ref: '#/components/schemas/Handlaggningspecifikation'
       required:
         - id
+        - version
+        - yrkandeId
         - processinstansId
-        - yrkande
 
     UppgiftStatus:
       type: string
@@ -150,13 +151,11 @@ components:
         beskrivning:
           type: string
           description: Beskrivning av handläggningspecifikationen
-        uppgiftspecifikation:
-          type: array
-          description: En eller flera uppgiftsspecifikationer som ingår i handläggningspecifikationen
-          items:
-            $ref: '#/components/schemas/Uppgiftspecifikation'
       required:
         - id
+        - version
+        - namn
+        - beskrivning
 
     Uppgift:
       type: object
@@ -190,19 +189,27 @@ components:
           nullable: true
         handlaggningId:
           type: string
-          description: Handläggingens Id
+          description: Handläggningens Id
           format: uuid
         uppgiftStatus:
           $ref: '#/components/schemas/UppgiftStatus'
         FSSAinformation:
           $ref: '#/components/schemas/FSSAinformation'
-        uppgiftspecifikation:
-          $ref: '#/components/schemas/Uppgiftspecifikation'
         underlag:
           type: array
           description: Ett eller flera underlag som uppgiften använder sig av
           items:
             $ref: '#/components/schemas/Underlag'
+        resultat:
+          type: array
+          description: Ett eller flera resultat av uppgiften
+          items:
+            $ref: '#/components/schemas/Resultat'
+      required:
+        - id
+        - version
+        - handlaggningId
+        - uppgiftStatus
 
     Underlag:
       type: object
@@ -216,51 +223,27 @@ components:
         data:
           type: string
           description: All data i underlaget i formatet JSON
+      required:
+        - typ
+        - version
+        - data
 
-    Uppgiftspecifikation:
+    Resultat:
       type: object
-      description: Uppgiftsspecifikation
       properties:
-        id:
+        typ:
           type: string
-          description: Uppgiftsspecifikationens unika ID
-          format: uuid
+          description: Specificerar vilken typ av resultat det är
         version:
           type: string
-          description: Uppgiftsspecifikationens version
-        namn:
+          description: Specificerar vilken version av resultatet det är
+        data:
           type: string
-          description: Namnet på uppgiftsspecifikationen
-        uppgiftbeskrivning:
-          description: Beskrivning av uppgiften i mer detalj
-        verksamhetslogik:
-          description: Beteckning för verksamhetslogiken i uppgiften
-          $ref: '#/components/schemas/Verksamhetslogik'
-        roll:
-          type: string
-          description: Behörighetsroll för uppgiften
-        applikationsId:
-          description: ID för applikation som hanterar uppgiften
-          type: string
-        applikationsVersion:
-          description: Version för applikation som hanterar uppgiften
-          type: string
-        regel:
-          description: En regler som styr uppgiften
-          $ref: '#/components/schemas/Regel'
-        uppgiftsGui:
-          type: string
-          description: GUI komponent för uppgiften
+          description: All data i resultatet i formatet JSON
       required:
-        - id
-
-    Verksamhetslogik:
-      type: string
-      description: Verksamhetslogik
-      enum:
-        - A
-        - B
-        - C
+        - typ
+        - version
+        - data
 
     FSSAinformation:
       type: string
@@ -268,61 +251,6 @@ components:
         - HANDLAGGNING_PAGAR
         - VANTAR_PA_INFO_FRAN_ANNAN_PART
         - VANTAR_PA_INFO_FRAN_KUND
-
-    Regel:
-      type: object
-      description: Regel
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Regelns unika ID
-        version:
-          type: string
-          description: Version av regeln
-        lagrum:
-          description: Ett Lagrum som Regeln hänvisar till
-          $ref: '#/components/schemas/Lagrum'
-      required:
-        - id
-
-    Lagrum:
-      type: object
-      description: Lagrum
-      properties:
-        id:
-          type: string
-          description: Lagrummets unika ID
-          format: uuid
-        version:
-          type: string
-          description: Lagrummets version
-        giltigFrom:
-          type: string
-          description: DateTime för starttiden av giltighet, enligt ISO 8601
-          format: date-time
-        giltigTom:
-          type: string
-          description: DateTime för sluttiden av giltighet, enligt ISO 8601
-          format: date-time
-          nullable: true
-        forfattning:
-          type: string
-          description: Avser vilken författning Lagrummet är av
-        kapitel:
-          type: string
-          description: Avser vilket kapitel av författningen Lagrummet är av
-        paragraf:
-          type: string
-          description: Avser vilket paragraf i kapitlet Lagrummet är av
-        stycke:
-          type: string
-          description: Avser vilket stycke i paragrafen Lagrummet är av
-        punkt:
-          type: string
-          description: Avser vilken punkt i stycket Lagrummet är av
-      required:
-        - id
 
     GetHandlaggningResponse:
       type: object
@@ -335,7 +263,7 @@ components:
 
     PutHandlaggningRequest:
       type: object
-      description: Data som krävs för att uppdatera ett handläggning
+      description: Data som krävs för att uppdatera en handläggning
       properties:
         uppgift:
           $ref: '#/components/schemas/Uppgift'
