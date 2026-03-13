@@ -1,3 +1,9 @@
+## 1.3.17 (2026-03-13)
+
+### Bug Fixes
+
+-  Tar bort uppgiftspecifikation och lägger till resultat ([3956a](https://github.com/Forsakringskassan/rimfrost-service-handlaggning-openapi/commit/3956ab7210b8de1) Ulf Slunga)  
+
 ## 1.3.16 (2026-03-12)
 
 ### Bug Fixes
